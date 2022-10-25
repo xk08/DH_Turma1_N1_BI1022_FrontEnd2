@@ -17,6 +17,15 @@ h1 {
   font-size: 3em;
 }
 
+h3 {
+  color: aqua;
+}
+
+.novoh3 {
+  color: rgb(147, 32, 111);
+  font-size: 25pt;
+}
+
 ul {
   display: flex;
   list-style: none;
