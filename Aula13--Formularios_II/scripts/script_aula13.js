@@ -1,9 +1,11 @@
 /* 1- Capturar as informações vindas do HTML e obter os valores com o JS */
 
+let inputNomeSobrenome = document.getElementById("nome");
+
 let btn = document.getElementById("salvar");
 btn.addEventListener('click', function (evento) {
 
-    let inputNomeSobrenome = document.getElementById("nome").value;
+
     let inputIdade = document.getElementById("idade");
     let inputAltura = document.getElementById("altura");
     //let inputBio = document.getElementById("biografia");
@@ -49,8 +51,8 @@ btn.addEventListener('click', function (evento) {
 
         //Retirando espaços em branco do inicio e do final da string
         let textoSemEspacos = textoMaiusculo.trim();
-        console.log("Texto com espaços:"+textoMaiusculo);
-        console.log("Texto sem espaços:"+textoSemEspacos);
+        console.log("Texto com espaços:" + textoMaiusculo);
+        console.log("Texto sem espaços:" + textoSemEspacos);
     }
 
 });
@@ -60,6 +62,71 @@ btn.addEventListener('click', function (evento) {
 /* Realizar algumas validações nos campos do formulário*/
 
 
-  /* Nome: Mínimo de 4 caracteres */
+btn.style.backgroundColor = "#6C6B6B"
+btn.setAttribute("disabled", true)
 
-  /* Email: Deve possuir um formato válido (RegExp) */
+
+/* Nome: Mínimo de 4 caracteres */
+email.addEventListener("focus", function () {
+    console.log("Clicou no campo");
+    email.style.backgroundColor = "#C4BFBF"
+});
+
+email.addEventListener("keyup", function () {
+
+    let emailValidacao = document.getElementById("emailValidacao");
+
+    console.log("Sai do campo");
+    email.style.backgroundColor = "#FFFF";
+
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+        //Validação passar
+        console.log("Validação passou");
+        email.style.backgroundColor = "#69C466";
+        emailValidacao.innerText = "";
+        btn.removeAttribute("disabled");
+        btn.style.backgroundColor = "#0b60db"
+
+    } else {
+        //Validação não passou
+        console.log("Validação não passou");
+        email.style.backgroundColor = "#EB5D5D";
+        emailValidacao.innerText = "Insira um email válido"
+        emailValidacao.style.fontWeight = "bold";
+        emailValidacao.style.color = "#EB5D5D";
+        btn.setAttribute("disabled", true);
+    }
+});
+
+
+/* Email: Deve possuir um formato válido (RegExp) */
+inputNomeSobrenome.addEventListener("focus", function () {
+    console.log("Clicou no campo");
+    inputNomeSobrenome.style.backgroundColor = "#C4BFBF"
+});
+
+inputNomeSobrenome.addEventListener("keyup", function () {
+
+    let nomeValidacao = document.getElementById("nomeValidacao");
+
+    console.log("Saiu do campo");
+    inputNomeSobrenome.style.backgroundColor = "#FFFF";
+
+    if (inputNomeSobrenome.value.length >= 4) {
+        //Validação passar
+        console.log("Validação passou");
+        inputNomeSobrenome.style.backgroundColor = "#69C466";
+        nomeValidacao.innerText = "";
+        btn.removeAttribute("disabled");
+        btn.style.backgroundColor = "#0b60db"
+
+    } else {
+        //Validação não passou
+        console.log("Validação não passou");
+        inputNomeSobrenome.style.backgroundColor = "#EB5D5D";
+        nomeValidacao.innerText = "Minimo de 4 caracteres"
+        nomeValidacao.style.fontWeight = "bold";
+        nomeValidacao.style.color = "#EB5D5D";
+        btn.setAttribute("disabled", true);
+    }
+});
