@@ -1,18 +1,42 @@
 /* %%%% Praticando os conceitos de Storage */
 
-//@@@ sessionStorage VS localStorage
+//Setando novos recursos no Storage
+localStorage.setItem("id1", "Aula Storage e JSON");
 
-// Métodos disponíveis
-//@@@ setItem -> Forma de armazenar
+//Atualizando o registro
+localStorage.setItem("id1", "Atualiza o recurso");
+localStorage.setItem(1, true);
+localStorage.setItem(2, true);
+localStorage.setItem(3, true);
+localStorage.setItem(4, false);
 
-//@@@ getItem -> Capturar um registro específico
+//Salvando na sessão
+sessionStorage.setItem(1, false);
 
-//@@@ buscar todos os registros?
+//Buscando um registro existente
+let registroUm = localStorage.getItem("id1");
+console.log(registroUm);
 
-//@@@ removeItem -> remover um registro específico
+//Removendo um registro do Storage
+localStorage.removeItem("id1");
 
-//@@@ clear -> Remover todos os registros
+//remover todos os recursos salvos
+localStorage.clear();
 
+//Salvando um objeto Literal JS no Storrage
 
+let usuario = {
+    nome: "Gilson",
+    estado: "SC",
+    cidade: "Urubici",
+    temperatura: "14 °C"
+}
 
-/* %%%% Práticando a utilização de JSON no JS */
+let usuarioJSON = JSON.stringify(usuario)
+
+localStorage.setItem(1, usuarioJSON);
+
+let usuaioStorage = localStorage.getItem(1);
+
+let usuarioFinal = JSON.parse(usuaioStorage)
+console.log(usuarioFinal.temperatura);

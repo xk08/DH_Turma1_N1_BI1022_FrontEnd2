@@ -191,8 +191,3 @@ email.addEventListener("keyup", function () {
   }
 
 });
-
-/* Objetivo da aula 14: Conhecer e praticar alguns cocneitos sobre JSON e Storage
-Objetivo: Queremos salvar as informações do forms, pra que sejam exibidas 
-automaticamente ao acessar a página 
-*/
