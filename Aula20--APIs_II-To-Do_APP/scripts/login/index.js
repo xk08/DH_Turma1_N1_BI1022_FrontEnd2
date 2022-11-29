@@ -30,16 +30,65 @@ botaoAcessarLogin.addEventListener("click", async function (evento) {
 
         console.log(`E-mail: ${emailLogin}`);
         console.log(`Senha: ${passwordLogin}`);
-        /* 
-        -> Criar o objeto JSON que será enviado
-        -> Realizar a conexão com a API
 
-        */
+        //Cria objeto JS que representa o login do usuário
+        let loginJs = {
+            email: emailLogin,
+            password: passwordLogin
+        }
+
+        //Cria objeto JSON que representa o login do usuário
+        let loginJson = JSON.stringify(loginJs);
+        console.log(loginJson);
+
+        //
+        loginApi(loginJson);
+
+
     } else {
         console.log("Login inválido");
     }
 
 });
+
+
+function loginApi(jsonRecebido) {
+
+    let configRequest = {
+        method: "POST",
+        body: jsonRecebido,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    fetch("https://ctd-fe2-todo-v2.herokuapp.com/v1/users/login", configRequest)
+        .then(
+            resultado => {
+                return resultado.json()
+            }
+        )
+        .then(
+            resultado => {
+                loginSucesso(resultado);
+            }
+        )
+        .catch(
+            erro => {
+                loginErro(erro);
+
+            }
+        );
+}
+
+function loginSucesso(resposta) {
+    console.log(resposta.jwt);
+}
+
+function loginErro(resposta) {
+    console.log(resposta);
+}
+
 
 /* Verifica se ambas as informações do formulário de login foram validadas */
 function validaLogin() {
