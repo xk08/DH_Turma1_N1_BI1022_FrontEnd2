@@ -39,10 +39,8 @@ botaoAcessarLogin.addEventListener("click", async function (evento) {
 
         //Cria objeto JSON que representa o login do usuário
         let loginJson = JSON.stringify(loginJs);
-        console.log(loginJson);
-
-        //
-        loginApi(loginJson);
+        //loginApi(loginJson);
+        loginAssincrono(loginJson);
 
 
     } else {
@@ -62,10 +60,16 @@ function loginApi(jsonRecebido) {
         }
     }
 
-    fetch("https://ctd-fe2-todo-v2.herokuapp.com/v1/users/login", configRequest)
+    fetch(`${baseUrl()}/users/login`, configRequest)
         .then(
             resultado => {
-                return resultado.json()
+
+                if (resultado.status == 201) {
+                    return resultado.json()
+                } else {
+                    //404 ou 400
+                    throw resultado;
+                }
             }
         )
         .then(
@@ -81,12 +85,47 @@ function loginApi(jsonRecebido) {
         );
 }
 
+async function loginAssincrono(jsonRecebido) {
+
+    let configRequest = {
+        method: "POST",
+        body: jsonRecebido,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    //Async/Await
+    try {
+        let login = await fetch(`${baseUrl()}/users/login`, configRequest);
+        if (login.status == 201) {
+            let loginResponse = await login.json();
+            loginSucesso(loginResponse);
+        } else {
+            throw login;
+        }
+    } catch (error) {
+        loginErro(error)
+    }
+}
+
+
 function loginSucesso(resposta) {
     console.log(resposta.jwt);
+
+    //Salva o token no cliente/front end
+    sessionStorage.setItem("jwt", resposta.jwt)
+
+    //Direciona o usuário pra pagina de tarefas
+    location.href = "tarefas.html";
+
 }
 
 function loginErro(resposta) {
     console.log(resposta);
+    if (resposta.status == 400 || resposta.status == 404) {
+        alert("E-mail e/ou senha inválidos.")
+    }
 }
 
 
