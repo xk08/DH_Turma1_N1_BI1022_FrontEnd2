@@ -8,12 +8,14 @@
 
   <!-- ----------------------------- estilos CSS ----------------------------- -->
   <link rel="stylesheet" href="./styles/tarefas.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <!-- ------------------- Biblioteca de icones - Fontawesome -------------------- -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="scripts/validacoes/utils.js" defer></script>
+    <script src="scripts/tasks/task.js" defer></script>
 
   <title>To-Do App</title>
 </head>
@@ -25,7 +27,7 @@
     </nav>
 
     <div class="user-info">
-      <p>Nome usuário</p>
+      <p id="nomeUsuarioTarefas"></p>
       <div class="user-image"></div>
       <p id="closeApp">Finalizar sessão</i>
       </p>
