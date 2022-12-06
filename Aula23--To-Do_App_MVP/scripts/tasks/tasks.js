@@ -75,5 +75,15 @@ let modificaUsuarioDom = (dadosUsuario) => {
 
 //LISTA TODAS AS TAREFAS
 let manipulaListaTarefas = (tarefas) => {
-    console.log(tarefas);
+   tarefas.forEach(tarefa => {
+
+    if(tarefa.completed) {
+        //Tarefas terminadas
+
+    }else{
+        //Tarefas pendentes
+        renderizaTarefaPendente(tarefa);
+    }
+
+   })
 }
