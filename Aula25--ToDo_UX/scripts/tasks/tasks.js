@@ -12,8 +12,12 @@ onload = function () {
     } else {
         //Executa as outras ações automáticas necessárias
         buscaDadosUsuario();
+
+        renderizarSkeletons(7, ".tarefas-pendentes");
         //Chama o método que lista todas as tarefas
         buscaTarefas();
+
+
     }
 }
 
@@ -58,12 +62,19 @@ async function buscaTarefas() {
         if (respostaApi.status == 200) {
             let respostaFinal = await respostaApi.json();
 
-            manipulaListaTarefas(respostaFinal);
+
+            setTimeout(() => {
+                removerSkeleton(".tarefas-pendentes");
+                manipulaListaTarefas(respostaFinal);
+            }, 1500);
+
+
 
         } else {
             throw Error("Ocorreu algum erro ao buscar as tarefas do usuário!");
         }
     } catch (error) {
+        removerSkeleton(".tarefas-pendentes");
         alert(error);
     }
 }
@@ -77,6 +88,8 @@ let modificaUsuarioDom = (dadosUsuario) => {
 
 //LISTA TODAS AS TAREFAS
 let manipulaListaTarefas = (listaTarefas) => {
+
+   
     listaTarefas.map(tarefa => {
         if (tarefa.completed) {
             //Tarefas concluidas
